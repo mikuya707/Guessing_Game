@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/myStyle.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="game.js"></script>
+</head>
+<body>
+	<div class="container">
+		
+		<!--<header class="page-header">
+			<ul class="nav nav-tabs pull-right">
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About</a></li>
+		</ul>
+		</header>-->
+		<div class="jumbotron">
+			<h1 class="text-center">Guessing Game</h1>
+			<p class="lead">This game will randomly generate a number between 1 and 100, type in your guess and find out if you win. You will have 7 chances to guess it right.</p>
+			<!--<form id="input">
+  			Your Answer: <input type="text" name="fname" value = "ep. 50"><br>
+			<input class="btn btn-success" type="submit" value="Guess">-->
+			 <div class="form-group">
+   			 	<input type="text" class="input-small text-center" id="guess" placeholder="ep. 50" name="guess">
+			 </div>
+			 <div class="form-group">
+   			 	<button type="submit" class="btn btn-success" id="submit" name="submit"/>Submit</button>
+   			 	<button id="reset" class="btn btn-warning">Restart</button>
+			</div>
+			
+			<p id="guesses">Attempted:</p>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+
+body{
+	background: url("http://www.civicartsproject.com/wp-content/uploads/2012/05/Short_North_Columbus_Ohio_CAPAAB0216_2x3_72dpi.jpg") no-repeat;
+	background-size:cover;
+}
+
+
+.container {
+	padding-top: 70px;
+}
+
+.jumbotron {
+	opacity: 1;
+}
