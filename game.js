@@ -7,7 +7,7 @@ $(document).ready(function(){
       var guesses = [];
       var times = 7;
 
-      $('#attempt').html('<p id="attempt">Attempt:  ' + times + '  times</p>');
+      $('#attempt').html('<p id="attempt">Attempt:  ' + times + '  times left.</p>');
 
       /**
         * Reset function.
@@ -39,19 +39,19 @@ $(document).ready(function(){
     	var win = "Strike! Great job!";
         var tryAgain = "Game over. #VALAR MORGHTULIS";
         var invalid = "Type a valid number!"
+        var repeat = "You guessed that already!"
 
         //retrive user input and add into guesses array.
         var value = $(".form-group").find('input[name="guess"]').val();
-        guesses.push(value);
+        
 
-        //display user's input in a table.
-        $.each(guesses, function( i, val ) {
-         $( "#" + i ).text(val);
-        });
          //when user submit an invalid guess
     if (value < 1 || value > 100 || isNaN(value)) {
         $('#msg').text(invalid).css("color", "red");
         alert("type a valid number between 1 and 100!");
+    }
+    else if (jQuery.inArray(value, guesses) !== -1){
+        $('#msg').text(repeat).css("color", "red");
     }
     else{
         //when user exhausted allowed attempts.
@@ -63,6 +63,7 @@ $(document).ready(function(){
             $('#msg').text('VALAR MORGHTULIS').css("color", "red");
         }
         else{
+            guesses.push(value);
             //when user guess the right answer
             if (value == number){
                 $('#msg').text(win).css("color", "green");
@@ -87,10 +88,24 @@ $(document).ready(function(){
                     $('#msg').text(icecold).css("color", "#00FFFF");
                 }
             }
+           //Suggest user how to adjust their guess
+           if(value < number){
+                $("#msg").append("<p style='color:red'>Guess higher.</h1>");
+            }
+            else if (value > number){
+                $("#msg").append("<p style='color:blue'>Guess lower.</h1>");
+            }
+
+
+            //decrement attempt times
+            times--;
         }
     }
-        //decrement attempt times
-        times--;
+        //display user's input in a table.
+        $.each(guesses, function( i, val ) {
+         $( "#" + i ).text(val);
+        });
+        
         //update times
         $('#attempt').html('<p id="attempt">Attempt:  ' + times + '  times</p>');
 
