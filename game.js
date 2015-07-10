@@ -1,83 +1,99 @@
 //Consider including Ajax in the code?? Try tmr
 
 $(document).ready(function(){
-    //Generate the random number and initiate allowed attempts.
-	  var number = Math.floor(Math.random() * 100 + 1);
+    /**Initialize game variables.*/
+
+	  var number = Math.floor(Math.random() * 100 + 1); 
+      var guesses = [];
       var times = 7;
-      //Reset the game
+
+      $('#attempt').html('<p id="attempt">Attempt:  ' + times + '  times</p>');
+
+      /**
+        * Reset function.
+        * User clicks on Restart buttom to start new game.
+        */
 	  $('#reset').click(function() {
-    location.reload();
+        location.reload();
         });
-      //Reveal the answer
+      
+      /**
+        * Cheating function.
+        * User clicks on Hint buttom to find out the answer.
+        */
       $('#hint').click(function() {
-            $('#msg').text(number);
+            $('#msg').text(number).css('color', 'black');
         });
-
-      //User submits the guess
+   
+      /**
+        * Submit function.
+        * User input number and click on Submit buttom to find out the result.
+        */
 	 $('#submit').click(function(){
-        
 
-    	var icecold = "Ice cold!! Be generous on the guess.";
-        var cold = "Cold. Guess higher!";
-    	var hot = "Hot. Guess lower!";
-    	var win = "You win!";
-        var burnhot = "Burning hot!! Be gentle on the guess.";
-        var warm = "Getting warmer, guess higher!";
-        var warmish = "Warmish, guess lower!";
+        //customize response messages.
+    	var icecold = "Ice cold!! #The winter is coming..";
+        var cold = "Cold Brr";
+    	var hot = "Hot Oww";
+        var warm = "Warming up"
+    	var win = "Strike! Great job!";
+        var tryAgain = "Game over. #VALAR MORGHTULIS";
+        var invalid = "Type a valid number!"
+
+        //retrive user input and add into guesses array.
         var value = $(".form-group").find('input[name="guess"]').val();
+        guesses.push(value);
 
-        //simplify the if /else statement
-        if(times > 0) {
-        if (value < number)
-        {
-            if ((number - value) <10)
-            {
-                $('#msg').text(warm);
+        //display user's input in a table.
+        $.each(guesses, function( i, val ) {
+         $( "#" + i ).text(val);
+        });
+         //when user submit an invalid guess
+    if (value < 1 || value > 100 || isNaN(value)) {
+        $('#msg').text(invalid).css("color", "red");
+        alert("type a valid number between 1 and 100!");
+    }
+    else{
+        //when user exhausted allowed attempts.
+        if (times == 0){
+            $('#msg').text(tryAgain).css("color", "red");
+            alert('You ran out of luck, loser :p');
+        }
+        else if(times < 0){
+            $('#msg').text('VALAR MORGHTULIS').css("color", "red");
+        }
+        else{
+            //when user guess the right answer
+            if (value == number){
+                $('#msg').text(win).css("color", "green");
             }
-            else
-            {
-                if ((number-value) <50 )
+            else{
+                //find out how far user's guess to the answer.
+                var diff = Math.abs(value-number);
+
+                //Based on diff's range, assign appropriate response.
+                if(5 >= diff){
+                    $('#msg').text(hot).css("color", "red");
+                }
+                else if(10 >= diff){
+                    $('#msg').text(warm).css("color", "orange");
+                }
+                else if (40 >= diff)
                 {
-                    
-                    $('#msg').text(cold);
+                    $('#msg').text(cold).css("color", "blue");
                 }
                 else
                 {
-                    $('#msg').text(icecold);
-                    
+                    $('#msg').text(icecold).css("color", "#00FFFF");
                 }
             }
         }
-        else if (value > number)
-        {
-            if ((value-number) <10)
-            {
-                $('#msg').text(warmish);
-            }
-            else
-            {
-                if ((value-number) < 50)
-                {
-                     $('#msg').text(hot);
-                }
-                else
-                {
-
-                   $('#msg').text(burnhot);
-                }
-                
-            }
-        }
-        else
-        {
-        	$('#msg').text(win);
-        }
-     }
-     else{
-        $('#msg').text("Sorry, you ran out of the luck. Try again!");
-     }
+    }
+        //decrement attempt times
         times--;
+        //update times
+        $('#attempt').html('<p id="attempt">Attempt:  ' + times + '  times</p>');
+
     });
-    
   
 });

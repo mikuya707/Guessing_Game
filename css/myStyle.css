@@ -7,10 +7,11 @@ body{
 
 .container {
 	padding-top: 70px;
+	padding-bottom: 0px;
 }
 
 .jumbotron {
-	min-height: 450px; 
+	min-height: 470px; 
 	opacity: 1;
 }
 
@@ -38,3 +39,23 @@ body{
 	padding-top: 15px;
 }
 
+#msg {
+	font-weight: bold;
+}
+#comment {
+	
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+	position: absolute;
+	text-align: center;
+	bottom: 0;
+  	width: 100%;
+}
+a {
+	color: white;
+}
+
+a:hover {
+	color: red;
+}
