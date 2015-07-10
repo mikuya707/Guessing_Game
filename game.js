@@ -1,27 +1,83 @@
+//Consider including Ajax in the code?? Try tmr
+
 $(document).ready(function(){
+    //Generate the random number and initiate allowed attempts.
 	  var number = Math.floor(Math.random() * 100 + 1);
+      var times = 7;
+      //Reset the game
 	  $('#reset').click(function() {
     location.reload();
-});
-	 $('#submit').on('click', function(){
-    	var cold = "<p>Too cold!</p>"
-    	var hot = "<p>It's getting hot!</p>"
-    	var win = "<p>You win!</p>"
+        });
+      //Reveal the answer
+      $('#hint').click(function() {
+            $('#msg').text(number);
+        });
+
+      //User submits the guess
+	 $('#submit').click(function(){
+        
+
+    	var icecold = "Ice cold!! Be generous on the guess.";
+        var cold = "Cold. Guess higher!";
+    	var hot = "Hot. Guess lower!";
+    	var win = "You win!";
+        var burnhot = "Burning hot!! Be gentle on the guess.";
+        var warm = "Getting warmer, guess higher!";
+        var warmish = "Warmish, guess lower!";
         var value = $(".form-group").find('input[name="guess"]').val();
-        if(value < number)
+
+        //simplify the if /else statement
+        if(times > 0) {
+        if (value < number)
         {
-        	$('#guesses').append(cold);
+            if ((number - value) <10)
+            {
+                $('#msg').text(warm);
+            }
+            else
+            {
+                if ((number-value) <50 )
+                {
+                    
+                    $('#msg').text(cold);
+                }
+                else
+                {
+                    $('#msg').text(icecold);
+                    
+                }
+            }
         }
         else if (value > number)
         {
-        	$('#guesses').append(hot);
+            if ((value-number) <10)
+            {
+                $('#msg').text(warmish);
+            }
+            else
+            {
+                if ((value-number) < 50)
+                {
+                     $('#msg').text(hot);
+                }
+                else
+                {
+
+                   $('#msg').text(burnhot);
+                }
+                
+            }
         }
         else
         {
-        	$('#guesses').append(win);
+        	$('#msg').text(win);
         }
-        //var test = $('<p>'+number+'</p>');
-        //$('#guesses').append(test);
+     }
+     else{
+        $('#msg').text("Sorry, you ran out of the luck. Try again!");
+     }
+        times--;
     });
+    
   
 });

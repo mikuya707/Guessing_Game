@@ -17,19 +17,24 @@
 		</header>-->
 		<div class="jumbotron">
 			<h1 class="text-center">Guessing Game</h1>
-			<p class="lead">This game will randomly generate a number between 1 and 100, type in your guess and find out if you win. You will have 7 chances to guess it right.</p>
-			<!--<form id="input">
-  			Your Answer: <input type="text" name="fname" value = "ep. 50"><br>
-			<input class="btn btn-success" type="submit" value="Guess">-->
-			 <div class="form-group">
-   			 	<input type="text" class="input-small text-center" id="guess" placeholder="ep. 50" name="guess">
-			 </div>
-			 <div class="form-group">
-   			 	<button type="submit" class="btn btn-success" id="submit" name="submit"/>Submit</button>
-   			 	<button id="reset" class="btn btn-warning">Restart</button>
+			<p id="msg">Good Luck!</p>
+			<div class="form-group">
+      			<div class="col-md-4 col-md-offset-4">          
+         			<input type="text" class="form-control text-center" id="guess" placeholder="Input number 1-100" name = "guess">
+      			</div>
+    		
+    			<div class="col-md-4 col-md-offset-4" id="btn-submit">
+    				<button type="submit" class="btn btn-success" id="submit" name="submit"/>Submit</button>
+    			</div>
+     			 <div class="col-md-4 col-md-offset-4" id="btn2">
+     			 	<button id="reset" class="btn btn-warning">Restart</button>  
+    			
+					<button id="hint" class="btn btn-info">Hint</button>  
+				</div>
 			</div>
-			
-			<p id="guesses">Attempted:</p>
+    		<div class="col-md-4 col-md-offset-4" id="record">	
+				<p id="guesses">Attempted:</p>
+			</div>
 		</div>
 	</div>
 </body>
